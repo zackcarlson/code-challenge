@@ -1,4 +1,4 @@
-/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+/* eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import "./Home.css";
@@ -42,6 +42,9 @@ const Home = (props) => {
   useEffect(() => {
     if (!window.localStorage.getItem("swatches")) {
       loadSwatches();
+    } else {
+      const swatchColors = JSON.parse(window.localStorage.getItem("swatches"));
+      setColors(swatchColors);
     }
   }, [loadSwatches]);
 
