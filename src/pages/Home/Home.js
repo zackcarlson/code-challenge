@@ -25,7 +25,7 @@ const Home = (props) => {
       const { client } = props;
       const { data } = await client.query({
         query: LOAD_SWATCHES,
-        variables: { numResults: swatches.length + 7 },
+        variables: { numResults: colors.length + 7 },
       });
 
       if (data && data.colors.length > 0) {
@@ -37,7 +37,7 @@ const Home = (props) => {
       console.error("Error loading swatches ", err);
       setIsLoading(false);
     }
-  }, [dispatch, props, swatches.length]);
+  }, [dispatch, props, colors.length]);
 
   useEffect(() => {
     if (!window.localStorage.getItem("swatches")) {
