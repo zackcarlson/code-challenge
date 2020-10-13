@@ -1,5 +1,5 @@
 import makeStore from "../store";
-import TOGGLE_SWATCH from "../constants";
+import { TOGGLE_SWATCH, CLEAR_CART } from "../constants";
 
 const initalState = JSON.parse(window.localStorage.getItem("cart")) || [];
 
@@ -19,6 +19,10 @@ const reducer = (state, action) => {
       window.localStorage.setItem("cart", JSON.stringify(cart));
 
       return cart;
+    }
+    case CLEAR_CART: {
+      window.localStorage.setItem("cart", JSON.stringify([]));
+      return [];
     }
     default:
       return state;
