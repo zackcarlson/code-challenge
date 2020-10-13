@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from 'uuid';
 import Swatch from "../Swatch/Swatch";
 import { PaletteType, SavedPaletteListProps } from "../../types";
 
@@ -14,7 +13,7 @@ const SavedPaletteList = ({
         palettes.map((paletteInfo: PaletteType) => {
           const { paletteName, palette, id } = paletteInfo;
           return (
-            <div key={uuidv4()}>
+            <div key={`${id}-${paletteName}`}>
               <h4>{paletteName}</h4>
               {palette.map((hex) => (
                 <Swatch key={hex} hex={hex} />

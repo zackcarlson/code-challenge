@@ -25,19 +25,20 @@ const Home = (props) => {
       const { client } = props;
       const { data } = await client.query({
         query: LOAD_SWATCHES,
-        variables: { numResults: colors.length + 7 },
+        variables: { resultOffset: colors.length },
       });
 
       if (data && data.colors.length > 0) {
-        dispatch({ type: SET_SWATCHES, swatches: data.colors });
-        setColors(data.colors);
+        const updatedSwatches = colors.concat(data.colors);
+        dispatch({ type: SET_SWATCHES, swatches: updatedSwatches });
+        setColors(updatedSwatches);
         setIsLoading(false);
       }
     } catch (err) {
       console.error("Error loading swatches ", err);
       setIsLoading(false);
     }
-  }, [dispatch, props, colors.length]);
+  }, [props, colors, dispatch]);
 
   useEffect(() => {
     if (!window.localStorage.getItem("swatches")) {
@@ -46,7 +47,8 @@ const Home = (props) => {
       const swatchColors = JSON.parse(window.localStorage.getItem("swatches"));
       setColors(swatchColors);
     }
-  }, [loadSwatches]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="home-page">
