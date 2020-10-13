@@ -1,47 +1,29 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import PropTypes from "prop-types";
 import "./Swatch.css";
-import { useCartDispatch } from "../../state/context/cartContext";
-import TOGGLE_SWATCH from "../../state/constants";
+import { generateSwatchBaseStyles } from "../../utlis";
+import { SwatchProps, SwatchBaseStyle } from "../../types";
 
-type SwatchProps = {
-  hex: string,
-  isSelected: boolean,
-};
-
-const Swatch = ({ hex, isSelected }: SwatchProps) => {
-  const dispatch = useCartDispatch();
-  const hexCode = `#${hex}`;
-
-  const generateBorderStyle = () => {
-    let borderColor = hexCode;
-
-    if (isSelected) {
-      if (hex === "000000") borderColor = "rgb(56 56 56)";
-      else borderColor = "rgba(0, 0, 0, .5)";
-    }
-
-    return borderColor;
-  };
-  const styles = {
-    backgroundColor: hexCode,
-    border: `4px solid ${generateBorderStyle()}`,
-  };
-
-  const handleToggle = () => {
-    dispatch({ type: TOGGLE_SWATCH, swatch: hex });
-  };
-
+const Swatch = ({ hex, isSelected, handleClick }: SwatchProps) => {
+  const styles: SwatchBaseStyle = generateSwatchBaseStyles(hex, isSelected);
   return (
-    <option style={styles} onClick={handleToggle} className="swatch-item">
+    <div style={styles} className="swatch-item" onClick={handleClick}>
       {hex}
-    </option>
+    </div>
   );
 };
 
 Swatch.propTypes = {
   hex: PropTypes.string.isRequired,
-  isSelected: PropTypes.bool.isRequired,
+  isSelected: PropTypes.bool,
+  handleClick: PropTypes.func,
+};
+
+Swatch.defaultProps = {
+  handleClick: () => {},
+  isSelected: false,
 };
 
 export default Swatch;
