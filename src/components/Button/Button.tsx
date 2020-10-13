@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Button.css";
-
-type ButtonProps = {
-  text: string,
-  handleClick: () => void,
-};
+import { ButtonProps } from "../../types";
 
 const Button = ({ text, handleClick }: ButtonProps) => (
   <button type="button" onClick={handleClick}>
