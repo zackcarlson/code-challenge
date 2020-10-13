@@ -1,5 +1,5 @@
 import makeStore from "../store";
-import SET_SWATCHES from "../constants";
+import { SET_SWATCHES } from "../constants";
 
 const initalState = JSON.parse(window.localStorage.getItem("swatches")) || [];
 
