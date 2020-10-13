@@ -9,7 +9,7 @@ import {
 } from "../../state/context/swatchContext";
 import SwatchList from "../../components/SwatchList/SwatchList.tsx";
 import Button from "../../components/Button/Button.tsx";
-import SET_SWATCHES from "../../state/constants";
+import { SET_SWATCHES } from "../../state/constants";
 import { LOAD_SWATCHES } from "../../state/apollo/queries";
 
 const Home = (props) => {
