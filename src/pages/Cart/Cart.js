@@ -1,13 +1,15 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./Cart.css";
-import CurrentPalette from "../../components/CurrentPalette/CurrentPalette";
+import CartSwatchList from "../../components/CartSwatchList/CartSwatchList.tsx";
 import SavedPaletteList from "../../components/SavedPaletteList/SavedPaletteList.tsx";
 import {
   usePaletteStore,
   usePaletteDispatch,
 } from "../../state/context/paletteContext";
 import { useCartStore, useCartDispatch } from "../../state/context/cartContext";
-import SavePaletteForm from "../../components/SavePaletteForm/SavePaletteForm";
+import SavePaletteForm from "../../components/SavePaletteForm/SavePaletteForm.tsx";
 import {
   SAVE_PALETTE,
   CLEAR_CART,
@@ -21,15 +23,36 @@ const Cart = () => {
   const cartDispatch = useCartDispatch();
   const [text, setText] = useState("");
   const [palettes, setPalettes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const palette = [...cart];
-    const newPalettes = [...palettes, { paletteName: text, palette }];
-    await paletteDispatch({ type: SAVE_PALETTE, paletteName: text, palette });
-    await cartDispatch({ type: CLEAR_CART });
-    setPalettes(newPalettes);
-    setText("");
+  const handleSubmit = async () => {
+    try {
+      setIsDisabled(true);
+      setIsLoading(true);
+
+      const newPalette = {
+        paletteName: text,
+        palette: [...cart],
+        id: uuidv4(),
+      };
+      const newPalettes = [...palettes, newPalette];
+
+      await paletteDispatch({
+        type: SAVE_PALETTE,
+        payload: newPalette,
+      });
+      await cartDispatch({ type: CLEAR_CART });
+
+      setPalettes(newPalettes);
+      setText("");
+      setIsLoading(false);
+      setIsDisabled(false);
+    } catch (err) {
+      setIsLoading(false);
+      setIsDisabled(false);
+      console.log("Error saving palette", err);
+    }
   };
 
   const handleChange = (e) => {
@@ -37,18 +60,22 @@ const Cart = () => {
   };
 
   const handleDeletePalette = async (id) => {
-    const newPalettes = palettes.filter((info) => {
-      if (info.id !== id) {
-        const temp = {};
-        temp.paletteName = info.paletteName;
-        temp.palette = [...info.palette];
-        temp.id = info.id;
-        return temp;
-      }
-      return "";
-    });
-    await paletteDispatch({ type: DELETE_PALETTE, id });
-    setPalettes(newPalettes);
+    try {
+      const newPalettes = palettes.filter((info) => {
+        if (info.id !== id) {
+          const temp = {};
+          temp.paletteName = info.paletteName;
+          temp.palette = [...info.palette];
+          temp.id = info.id;
+          return temp;
+        }
+        return "";
+      });
+      await paletteDispatch({ type: DELETE_PALETTE, payload: id });
+      setPalettes(newPalettes);
+    } catch (err) {
+      console.log("Error deleting palette", err);
+    }
   };
 
   useEffect(() => {
@@ -57,11 +84,13 @@ const Cart = () => {
 
   return (
     <div className="cart-page">
-      <CurrentPalette />
+      <CartSwatchList />
       <SavePaletteForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         text={text}
+        isLoading={isLoading}
+        isDisabled={isDisabled}
       />
       <SavedPaletteList
         palettes={palettes}
