@@ -1,0 +1,28 @@
+.button__base {
+  background: #1e4091;
+  color: white;
+  border: none;
+  width: 9rem;
+  padding: 1rem 2.1rem;
+  border-radius: 2.6rem;
+}
+
+.button__base:focus {
+  outline: 0;
+}
+
+.enabled {
+  cursor: pointer;
+  transition: background 250ms ease;
+}
+
+.enabled:hover {
+  background: #1a3677;
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: #c0c0c0;
+  background-color: #ffffff;
+}

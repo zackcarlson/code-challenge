@@ -5,10 +5,11 @@ interface SwatchInfo {
 
 export type ButtonProps = {
   text: string;
-  handleClick: () => void;
+  handleClick: (param?: any) => void;
+  isDisabled: boolean;
 };
 
-export type DeletableSwatchProps = {
+export type CartSwatchProps = {
   hex: string;
   handleClick: () => void;
 };
@@ -29,6 +30,11 @@ export type PaletteType = {
   id: string;
 };
 
+export type SavedPaletteProps = {
+  paletteInfo: PaletteType;
+  handleDeletePalette: (id: string) => void;
+};
+
 export type SavedPaletteListProps = {
   palettes: PaletteType[];
   handleDeletePalette: (id: string) => void;
@@ -41,6 +47,8 @@ export type SwatchBaseStyle = {
 
 export type SavePaletteFormProps = {
   handleChange: (e: any) => void;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
   text: string;
+  isDisabled: boolean;
+  isLoading: boolean;
 };
