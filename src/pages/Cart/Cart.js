@@ -92,6 +92,7 @@ const Cart = () => {
         isLoading={isLoading}
         isDisabled={isDisabled}
       />
+      <div className="horizontal-line" />
       <SavedPaletteList
         palettes={palettes}
         handleDeletePalette={handleDeletePalette}

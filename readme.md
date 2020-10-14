@@ -11,7 +11,7 @@ By [Zack Carlson](mailto:zackt.carlson@gmail.com)
    `git clone https://github.com/zackcarlson/code-challenge.git`
 3. Install dependencies using `npm install`
 4. Run tests using `npm test`
-5. Start your dev server using `npm dev`
+5. Start your dev server using `npm run dev`
 6. Navigate to app in [browser](http://localhost:3000)
 7. Enjoy!
 

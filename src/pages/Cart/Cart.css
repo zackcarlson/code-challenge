@@ -1,3 +1,9 @@
 .cart-page {
   padding: 1.1rem;
 }
+
+.horizontal-line {
+  max-width: 800px;
+  width: 100%;
+  border-top: 1px solid #d8d8d8;
+}
