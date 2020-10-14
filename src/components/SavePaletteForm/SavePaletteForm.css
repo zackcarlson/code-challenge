@@ -1,0 +1,34 @@
+.save-palette-form {
+  margin: 3rem 0.5rem;
+}
+
+.save-palette-form > label {
+  max-width: 270px;
+  width: 100%;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+  max-width: 460px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-wrapper > input {
+  max-width: 270px;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  -webkit-box-shadow: 0 0 15px -5px #979797;
+  -moz-box-shadow: 0 0 15px -5px #979797;
+  box-shadow: 0 0 15px -5px #979797;
+}
+
+.input-wrapper > button {
+  margin-top: 1rem;
+}
