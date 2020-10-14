@@ -1,0 +1,15 @@
+.cart-swatch-item {
+  flex-direction: column;
+  cursor: default !important;
+}
+
+.cart-swatch-item > p {
+  margin-bottom: 2rem;
+}
+
+.trash-icon {
+  cursor: pointer;
+  position: relative;
+  bottom: 0.7rem;
+  right: -3rem;
+}
