@@ -1,0 +1,9 @@
+.home-page {
+}
+
+.load-more-btn {
+  position: fixed;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+}
