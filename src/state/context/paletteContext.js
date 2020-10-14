@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import makeStore from "../store";
 import { SAVE_PALETTE, DELETE_PALETTE } from "../constants";
 
@@ -7,14 +6,13 @@ const initalState = JSON.parse(window.localStorage.getItem("palettes")) || [];
 const reducer = (state, action) => {
   switch (action.type) {
     case SAVE_PALETTE: {
-      const { paletteName, palette } = action;
-      const palettes = [...state, { paletteName, palette, id: uuidv4() }];
-
+      const { paletteName, palette, id } = action.payload;
+      const palettes = [...state, { paletteName, palette, id }];
       window.localStorage.setItem("palettes", JSON.stringify(palettes));
       return palettes;
     }
     case DELETE_PALETTE: {
-      const { id } = action;
+      const id = action.payload;
       const palettes = state.filter((info) => {
         if (info.id !== id) {
           const temp = {};
