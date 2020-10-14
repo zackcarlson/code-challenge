@@ -18,9 +18,11 @@ const Home = (props) => {
 
   const [colors, setColors] = useState(swatches);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const loadSwatches = useCallback(async () => {
     try {
+      setIsDisabled(true);
       setIsLoading(true);
       const { client } = props;
       const { data } = await client.query({
@@ -33,10 +35,12 @@ const Home = (props) => {
         dispatch({ type: SET_SWATCHES, swatches: updatedSwatches });
         setColors(updatedSwatches);
         setIsLoading(false);
+        setIsDisabled(false);
       }
     } catch (err) {
       console.error("Error loading swatches ", err);
       setIsLoading(false);
+      setIsDisabled(false);
     }
   }, [props, colors, dispatch]);
 
@@ -52,9 +56,14 @@ const Home = (props) => {
 
   return (
     <div className="home-page">
-      {isLoading && <p>Loading...</p>}
       <SwatchList swatches={colors} />
-      <Button text="Load More" handleClick={loadSwatches} />
+      <div className="load-more-btn">
+        <Button
+          text={isLoading ? "Loading" : "Load More"}
+          handleClick={loadSwatches}
+          isDisabled={isDisabled}
+        />
+      </div>
     </div>
   );
 };
