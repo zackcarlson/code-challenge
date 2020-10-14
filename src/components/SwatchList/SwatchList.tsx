@@ -15,7 +15,7 @@ const SwatchList = ({ swatches }: SwatchListProps) => {
   };
 
   return (
-    <ul className="swatch-list">
+    <div className="swatch-list">
       {swatches &&
         swatches.length > 0 &&
         swatches.map(({ hex }) => {
@@ -32,7 +32,7 @@ const SwatchList = ({ swatches }: SwatchListProps) => {
             />
           );
         })}
-    </ul>
+    </div>
   );
 };
 
