@@ -8,9 +8,10 @@ import { SwatchProps, SwatchBaseStyle } from "../../types";
 
 const Swatch = ({ hex, isSelected, handleClick }: SwatchProps) => {
   const styles: SwatchBaseStyle = generateSwatchBaseStyles(hex, isSelected);
+  const hexCode = `#${hex}`;
   return (
     <div style={styles} className="swatch-item" onClick={handleClick}>
-      {hex}
+      {hexCode}
     </div>
   );
 };
