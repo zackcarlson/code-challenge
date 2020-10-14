@@ -1,0 +1,4 @@
+.saved-palette-list {
+  display: flex;
+  flex-direction: column;
+}
