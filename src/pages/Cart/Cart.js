@@ -24,7 +24,7 @@ const Cart = () => {
   const [text, setText] = useState("");
   const [palettes, setPalettes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleSubmit = async () => {
     try {
@@ -56,7 +56,13 @@ const Cart = () => {
   };
 
   const handleChange = (e) => {
-    setText(e.target.value);
+    const { value } = e.target;
+    setText(value);
+    if (value.length > 0) {
+      if (isDisabled) setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
   };
 
   const handleDeletePalette = async (id) => {
