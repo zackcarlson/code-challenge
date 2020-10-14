@@ -1,2 +1,50 @@
-.cart-icon {
+.nav-bar {
+  background: #1e4091;
+  padding: 0.2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100000;
+}
+
+.nav-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center !important;
+}
+
+.logo-li-item {
+  margin: 0.1rem 0 0 0.5rem;
+}
+
+.cart-li-item {
+  margin: 0.1rem 2rem 0 0;
+}
+
+.cart-amount {
+  position: absolute;
+  background: #f13757;
+  border-radius: 50%;
+  right: 1rem;
+  border: 3px solid #1e4091;
+  color: #ffffff;
+}
+
+.less-than-ten {
+  padding: 0.35rem 0.66rem;
+  font-size: 0.8rem;
+}
+
+.ten {
+  padding: 0.5rem 0.54rem;
+  font-size: 0.6rem;
+}
+
+.greater-than-ten {
+  font-size: 0.3rem;
+  padding: 0.5rem 0.4rem;
 }
